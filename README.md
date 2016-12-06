@@ -2,7 +2,7 @@
 
 #### _Single-line Description, version number, date_
 
-#### By _Michael Andrade, with thanks to Epicodus_
+#### By _Marty Kovach, with thanks to Epicodus, and Michael Andrade_
 
 ## Description
 
@@ -39,4 +39,4 @@ This file is part of (Program Name).
     You should have received a copy of the GNU General Public License
     along with the (Program Name).  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright (c) 2016 **_Michael Andrade_**
+Copyright (c) 2016 **_Marty Kovach,_**
