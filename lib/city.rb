@@ -14,8 +14,17 @@ class City
       name = city.fetch("name")
       id = city.fetch("id").to_i()
       train_id = city.fetch("train_id")
-      cities_list.push(City.new({:name => name, :train_id => train_id, :id => id}))
+      cities.push(City.new({:name => name, :train_id => train_id, :id => id}))
     end
     cities
+  end
+
+  define_method(:==) do |another_city|
+  name().==(another_city.name()).&(self.id().==(another_city.id()))
+  end
+
+  define_method(:save) do
+    result = DB.exec("INSERT INTO cities (name, train_id) VALUES ('#{@name}', #{@train_id or "NULL"}) RETURNING id;")
+    @id = result.first().fetch("id").to_i()
   end
 end
