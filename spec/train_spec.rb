@@ -11,7 +11,7 @@ RSpec.configure do |config|
  end
 end
 
-test_train = Train.new({:name => "MAX", :city_id => nil, :id => nil, :times => nil})
+test_train = Train.new({:name => "MAX", :city_id => 'NULL', :id => 'NULL', :times => 'NULL'})
 
 describe(Train) do
   describe('#name') do
@@ -22,6 +22,19 @@ describe(Train) do
   describe('.all') do
     it('is empty at first') do
       expect(Train.all()).to(eq([]))
+    end
+  end
+  describe('#save') do
+    it('saves the train into the database') do
+      test_train.save()
+      expect(Train.all()).to(eq([test_train]))
+    end
+  end
+  describe('#==') do
+    it('will return the trains are the same if they share name, and id') do
+      test_train
+      test_train2 = Train.new({:name => "MAX", :city_id => "NULL", :id => "NULL", :times => "NULL" })
+      expect(test_train).to(eq(test_train2))
     end
   end
 end
