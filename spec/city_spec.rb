@@ -45,4 +45,11 @@ describe(City) do
       expect(test_city.name()).to(eq("Houston"))
     end
   end
+  describe("#delete") do
+    it('will delete the city.') do
+      test_city.save()
+      test_city.delete()
+      expect(City.all()).to(eq([]))
+    end
+  end
 end
