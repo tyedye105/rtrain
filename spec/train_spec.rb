@@ -37,11 +37,18 @@ describe(Train) do
       expect(test_train).to(eq(test_train2))
     end
   end
-   describe('#update') do
-     it('updates trains in the database') do
-       test_train.save()
-       test_train.update({:name => "C-Tran"})
-       expect(test_train.name()).to(eq("C-Tran"))
-     end
+  describe('#update') do
+   it('updates the trains in the database') do
+     test_train.save()
+     test_train.update({:name => "C-Tran"})
+     expect(test_train.name()).to(eq("C-Tran"))
    end
+  end
+  describe('#delete') do
+    it('deletes the trains from the database') do
+      test_train.save()
+      test_train.delete()
+      expect(Train.all()).to(eq([]))
+    end
+  end
 end
