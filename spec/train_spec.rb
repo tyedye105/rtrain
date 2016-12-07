@@ -1,5 +1,15 @@
 require('rspec')
 require('train')
+require('pg')
+
+DB = PG.connect({:dbname => "test_train"})
+
+RSpec.configure do |config|
+ config.after(:each) do
+   DB.exec("DELETE FROM trains *;")
+   DB.exec("DELETE FROM cities *;")
+ end
+end
 
 test_train = Train.new({:name => "MAX", :city_id => nil, :id => nil, :times => nil})
 

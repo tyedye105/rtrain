@@ -9,6 +9,15 @@ class Train
   end
 
   define_singleton_method(:all) do
-    @@train_list = []
-  end
+    returned_trains = DB.exec("SELECT * FROM trains;")
+    trains = []
+    returned_trains.each do |train|
+      name = train.fetch("name")
+      city_id = train.fetch("train_id")
+      id = train.fetch("id")
+      times = train.fetch("times")
+      trains.push(Train.new({:name => name, :city_id => city_id, :id => id, :times => times}))
+    end
+    trains
+  end  
 end
