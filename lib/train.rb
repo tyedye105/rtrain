@@ -7,4 +7,8 @@ class Train
     @id = attributes.fetch(:id)
     @times = attributes.fetch(:times)
   end
+
+  define_singleton_method(:all) do
+    @@train_list = []
+  end
 end
