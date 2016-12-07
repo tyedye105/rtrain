@@ -51,4 +51,13 @@ describe(Train) do
       expect(Train.all()).to(eq([]))
     end
   end
+  describe('.find') do
+    it("search for train by its id number and return the matching train")do
+    test_train.save()
+    test_train2 = Train.new(:name => "Coal-train")
+    test_train2.save()
+    expect(Train.find(test_train2.id())).to(eq(test_train2))
+
+    end
+  end
 end
