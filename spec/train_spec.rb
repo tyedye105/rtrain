@@ -11,7 +11,7 @@ RSpec.configure do |config|
  end
 end
 
-test_train = Train.new({:name => "MAX", :city_id => 'NULL', :id => 'NULL', :times => 'NULL'})
+test_train = Train.new({:name => "MAX"})
 
 describe(Train) do
   describe('#name') do
@@ -31,9 +31,9 @@ describe(Train) do
     end
   end
   describe('#==') do
-    it('will return the trains are the same if they share name, and id') do
+    it('will return the trains are the same if they share name') do
       test_train
-      test_train2 = Train.new({:name => "MAX", :city_id => "NULL", :id => "NULL", :times => "NULL" })
+      test_train2 = Train.new({:name => "MAX"})
       expect(test_train).to(eq(test_train2))
     end
   end

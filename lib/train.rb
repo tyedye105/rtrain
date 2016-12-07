@@ -1,11 +1,9 @@
 class Train
-  attr_reader(:name, :city_id, :id, :times)
+  attr_reader(:name, :id)
 
   define_method(:initialize) do |attributes|
     @name = attributes.fetch(:name)
-    @city_id = attributes.fetch(:city_id)
-    @id = attributes.fetch(:id)
-    @times = attributes.fetch(:times)
+    @id = attributes[:id]
   end
 
   define_singleton_method(:all) do
@@ -13,16 +11,14 @@ class Train
     trains = []
     returned_trains.each do |train|
       name = train.fetch("name")
-      city_id = train.fetch("city_id").to_i()
       id = train.fetch("id").to_i()
-      times = train.fetch("times")
-      trains.push(Train.new({:name => name, :city_id => city_id, :id => id, :times => times}))
+      trains.push(Train.new({:name => name, :id => id}))
     end
     trains
   end
 
   define_method(:save) do
-    result = DB.exec("INSERT INTO trains (name, city_id, times) VALUES ('#{@name}',#{@city_id or "NULL"},#{@times or "NULL"}) RETURNING id;")
+    result = DB.exec("INSERT INTO trains (name) VALUES ('#{@name}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
   end
 
