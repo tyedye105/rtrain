@@ -19,4 +19,9 @@ describe(City) do
       expect(test_city.id()).to(eq(nil))
     end
   end
+  describe(".all") do
+    it("is an empty array at first") do
+      expect(City.all()).to(eq([]))
+    end
+  end
 end
