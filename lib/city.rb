@@ -11,9 +11,9 @@ class City
     returned_cities = DB.exec("SELECT * FROM cities;")
     cities = []
     returned_cities.each() do |city|
-      name = city.name()
-      id = city.id()
-      train_id = city.train_id()
+      name = city.fetch("name")
+      id = city.fetch("id").to_i()
+      train_id = city.fetch("train_id")
       cities_list.push(City.new({:name => name, :train_id => train_id, :id => id}))
     end
     cities
