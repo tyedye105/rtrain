@@ -1,6 +1,7 @@
 require('rspec')
-require('city')
 require('pg')
+require('Train')
+require('city')
 
 
 RSpec.configure do |config|
