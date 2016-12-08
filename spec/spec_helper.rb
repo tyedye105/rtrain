@@ -1,6 +1,6 @@
 require('rspec')
 require('pg')
-require('Train')
+require('train')
 require('city')
 
 
