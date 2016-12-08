@@ -36,4 +36,13 @@ class City
     DB.exec("DELETE FROM cities WHERE id = #{@id};")
   end
 
+  define_singleton_method(:find) do |city_id|
+    found_city = nil
+    City.all.each() do |city|
+      if city.id().eql?(city_id)
+        found_city = city
+      end
+    end
+    found_city
+  end
 end
