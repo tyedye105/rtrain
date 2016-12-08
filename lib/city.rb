@@ -27,10 +27,25 @@ class City
   end
 
   define_method(:update) do |attributes|
-    @name = attributes.fetch(:name)
-    @id = self.id()
-    DB.exec("UPDATE cities SET name = '#{@name}' WHERE id = #{@id};")
+    @name = attributes.fetch(:name, @name)
+    DB.exec("UPDATE cities SET name = '#{@name}' WHERE id = #{self.id()};")
+
+    attributes.fetch(:train_ids, []).each() do |train_id|
+      DB.exec("INSERT INTO stops (city_ids, train_ids) VALUES (#{self.id()}, #{train_id});")
+    end
   end
+
+  define_method(:trains) do
+    active_trains = []
+    results = DB.exec("SELECT train_ids FROM stops WHERE city_ids = #{self.id()};")
+    results.each() do |result|
+      train_id = result.fetch('train_ids').to_i()
+      train = DB.exec("SELECT * FROM trains WHERE id = #{train_id};")
+      train_name = train.first().fetch('name')
+      active_trains.push(Train.new({:name => train_name, :id => train_id}))
+  end
+  active_trains
+end
 
   define_method(:delete) do
     DB.exec("DELETE FROM cities WHERE id = #{@id};")
