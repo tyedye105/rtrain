@@ -48,6 +48,7 @@ class City
 end
 
   define_method(:delete) do
+    DB.exec("DELETE FROM stops WHERE city_ids = #{self.id()};")
     DB.exec("DELETE FROM cities WHERE id = #{@id};")
   end
 

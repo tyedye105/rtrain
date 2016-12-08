@@ -48,7 +48,7 @@ end
   end
 
   define_method(:delete) do
-    @id = self.id()
+    DB.exec("DELETE FROM stops WHERE train_ids = #{self.id()};")
     DB.exec("DELETE FROM trains WHERE id = #{self.id()};")
   end
 
